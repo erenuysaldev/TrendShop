@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {}
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj",
         "projectName": "ECommerce.Shared",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

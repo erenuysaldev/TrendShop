@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D0dZl+xYVuA=",
+  "dgSpecHash": "k10t0fLxDYg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj",
+  "projectFilePath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Eren\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Eren\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

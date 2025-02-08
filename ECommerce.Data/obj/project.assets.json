@@ -4321,11 +4321,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj",
       "projectName": "ECommerce.Data",
-      "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj",
+      "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj",
       "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\obj\\",
+      "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4346,11 +4346,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj": {
-              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj"
+            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj": {
+              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj"
             },
-            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
-              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj"
+            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj"
             }
           }
         }

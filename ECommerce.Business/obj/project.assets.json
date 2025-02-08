@@ -4413,11 +4413,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj",
+      "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj",
       "projectName": "ECommerce.Business",
-      "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj",
+      "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj",
       "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\obj\\",
+      "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4438,11 +4438,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj": {
-              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj"
+            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj": {
+              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj"
             },
-            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
-              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj"
+            "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+              "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj"
             }
           }
         }

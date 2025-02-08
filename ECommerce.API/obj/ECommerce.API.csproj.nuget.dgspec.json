@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.API\\ECommerce.API.csproj": {}
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.API\\ECommerce.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.API\\ECommerce.API.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.API\\ECommerce.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.API\\ECommerce.API.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.API\\ECommerce.API.csproj",
         "projectName": "ECommerce.API",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.API\\ECommerce.API.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.API\\ECommerce.API.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.API\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj": {
-                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj"
+              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj": {
+                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj"
               },
-              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
-                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj"
+              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj"
               }
             }
           }
@@ -93,14 +93,14 @@
         }
       }
     },
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj",
         "projectName": "ECommerce.Business",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\ECommerce.Business.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\ECommerce.Business.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Business\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -121,11 +121,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj": {
-                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj"
+              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj": {
+                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj"
               },
-              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
-                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj"
+              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj"
               }
             }
           }
@@ -179,14 +179,14 @@
         }
       }
     },
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj",
         "projectName": "ECommerce.Data",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\ECommerce.Data.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\ECommerce.Data.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Data\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -207,11 +207,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj": {
-                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj"
+              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj": {
+                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj"
               },
-              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
-                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj"
+              "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+                "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj"
               }
             }
           }
@@ -269,14 +269,14 @@
         }
       }
     },
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj",
         "projectName": "ECommerce.Entity",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -340,14 +340,14 @@
         }
       }
     },
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj",
         "projectName": "ECommerce.Shared",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\ECommerce.Shared.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\ECommerce.Shared.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Shared\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

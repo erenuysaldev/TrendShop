@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj": {}
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj": {
+    "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj",
+        "projectUniqueName": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj",
         "projectName": "ECommerce.Entity",
-        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\ECommerce.Entity.csproj",
+        "projectPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj",
         "packagesPath": "C:\\Users\\Eren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerceApp\\ECommerce.Entity\\obj\\",
+        "outputPath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
