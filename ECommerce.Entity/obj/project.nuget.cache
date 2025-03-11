@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AgvpegIpt2A=",
+  "dgSpecHash": "9mxcJspoe64=",
   "success": true,
   "projectFilePath": "C:\\Users\\Eren\\Desktop\\ECommerceProject\\ECommerce.Entity\\ECommerce.Entity.csproj",
   "expectedPackageFiles": [
@@ -23,16 +23,5 @@
     "C:\\Users\\Eren\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
     "C:\\Users\\Eren\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Extensions.Caching.Memory' 8.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-qj66-m88j-hmgj",
-      "libraryId": "Microsoft.Extensions.Caching.Memory",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

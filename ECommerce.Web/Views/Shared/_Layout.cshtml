@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TrendShop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0275d8;
+            --secondary-color: #6c757d;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin-right: 10px;
+            padding: 8px 16px !important;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(2, 117, 216, 0.1);
+            color: var(--primary-color) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .footer {
+            background-color: var(--dark-color);
+            color: white !important;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+        
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        main {
+            padding: 1rem 0;
+            flex: 1;
+        }
+    </style>
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-bag-heart-fill"></i> TrendShop
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house"></i> Ana Sayfa
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Product" asp-action="Index">
+                                <i class="bi bi-grid"></i> Ürünler
+                            </a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Seller" asp-action="Index">
+                                    <i class="bi bi-shop"></i> Satıcı Panel
+                                </a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin" asp-action="Index">
+                                    <i class="bi bi-gear"></i> Admin Panel
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <a class="nav-link position-relative me-3" asp-controller="Cart" asp-action="Index">
+                            <i class="bi bi-cart-fill fs-4"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                                <!-- Cart count goes here -->
+                                0
+                            </span>
+                        </a>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-title">TrendShop</h5>
+                    <p class="text-light">En kaliteli ürünleri en uygun fiyatlarla sizlerle buluşturuyoruz. 7/24 hizmetinizdeyiz.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="https://www.facebook.com/infotechakademi" class="fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/infotechakademi" class="fs-4"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.instagram.com/infotechakademi/" class="fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/c/infotechacademy/" class="fs-4"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="footer-title">Kurumsal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://github.com/erenuysaldev">Hakkımızda</a></li>
+                        <li><a href="https://github.com/erenuysaldev">Kariyer</a></li>
+                        <li><a href="https://github.com/erenuysaldev">İletişim</a></li>
+                        <li><a href="https://github.com/erenuysaldev">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5 class="footer-title">Yardım</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.infotechacademy.com.tr/">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="https://www.infotechacademy.com.tr/">Kargo & Teslimat</a></li>
+                        <li><a href="https://www.infotechacademy.com.tr/">İade & Değişim</a></li>
+                        <li><a href="https://www.infotechacademy.com.tr/">Kullanım Koşulları</a></li>
+                    </ul>
+                </div>
+                <!-- <div class="col-md-4">
+                    <h5 class="footer-title">Bültenimize Abone Olun</h5>
+                    <p class="text-light">En yeni ürünler ve kampanyalardan haberdar olun.</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="E-posta adresiniz">
+                        <button class="btn btn-primary" type="button">Abone Ol</button>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="mt-4 mb-4 bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0 text-light">&copy; @DateTime.Now.Year TrendShop - Tüm Hakları Saklıdır</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <img src="/images/visa.png" alt="Visa" class="me-2">
+                    <img src="/images/mastercard.png" alt="MasterCard" class="me-2">
+                   
+                    <!-- <img src="/images/troy.jpg" alt="Troy" class="me-2"> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

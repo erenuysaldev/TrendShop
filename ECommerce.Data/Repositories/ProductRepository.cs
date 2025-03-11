@@ -14,6 +14,7 @@ namespace ECommerce.Data.Repositories
         {
             return await _context.Products
                 .Include(p => p.Category)
+                .Where(p => !p.IsDeleted)
                 .ToListAsync();
         }
 
@@ -21,8 +22,21 @@ namespace ECommerce.Data.Repositories
         {
             return await _context.Products
                 .Include(p => p.Category)
-                .Where(p => p.CategoryId == categoryId)
+                .Where(p => p.CategoryId == categoryId && !p.IsDeleted)
                 .ToListAsync();
+        }
+
+        public new async Task<Product> GetByIdAsync(int id)
+        {
+            return await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+        }
+
+        public override async Task UpdateAsync(Product entity)
+        {
+            entity.UpdatedAt = DateTime.Now;
+            _context.Products.Update(entity);
         }
     }
 } 

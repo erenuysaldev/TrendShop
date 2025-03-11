@@ -1,0 +1,206 @@
+@model ECommerce.Web.Models.ProductCreateModel
+@{
+    ViewData["Title"] = "Yeni Ürün Ekle";
+    Layout = "_SellerLayout";
+}
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Yeni Ürün Ekle</h1>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Ürün Bilgileri</h6>
+        </div>
+        <div class="card-body">
+            <form asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="5" id="productDescription"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <small class="form-text text-muted">
+                        Ürün açıklaması en az 50 karakter olmalıdır. İyi bir açıklama, ürününüzün görünürlüğünü artırır 
+                        ve müşterilerin satın alma kararını olumlu etkiler.
+                    </small>
+                    <div id="charCount" class="text-muted mt-1">0 karakter (Min: 50)</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₺</span>
+                                </div>
+                                <input asp-for="Price" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="DiscountedPrice" class="control-label"></label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">₺</span>
+                                </div>
+                                <input asp-for="DiscountedPrice" class="form-control" />
+                            </div>
+                            <span asp-validation-for="DiscountedPrice" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="StockQuantity" class="control-label"></label>
+                            <input asp-for="StockQuantity" class="form-control" />
+                            <span asp-validation-for="StockQuantity" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImageUrl" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="bi bi-link"></i></span>
+                        </div>
+                        <input asp-for="ImageUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                    </div>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    <small class="form-text text-muted">Ürün görselinin internet adresini (URL) girin. Örneğin: https://example.com/urun-resmi.jpg</small>
+                    <div class="mt-2">
+                        <p class="mb-1">Resim önizleme:</p>
+                        <img id="imagePreview" src="@(Model?.ImageUrl ?? "https://via.placeholder.com/350")" alt="Ürün resmi önizleme" class="img-thumbnail" style="max-height: 120px; max-width: 120px; object-fit: contain;" />
+                    </div>
+                </div>
+
+                <div class="card mt-4 mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary">Ürün Özellikleri</h6>
+                    </div>
+                    <div class="card-body" id="featuresContainer">
+                        <p class="text-muted mb-3">
+                            Ürününüzün teknik özelliklerini ekleyin (örn: Renk: Kırmızı, Malzeme: Pamuk)
+                        </p>
+                        <div class="feature-row mb-2">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <input name="Features[0].Name" class="form-control" placeholder="Özellik Adı" />
+                                </div>
+                                <div class="col-md-5">
+                                    <input name="Features[0].Value" class="form-control" placeholder="Özellik Değeri" />
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger remove-feature">Kaldır</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" id="addFeature" class="btn btn-secondary">+ Özellik Ekle</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+                    <button type="submit" class="btn btn-primary">Ürünü Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // TinyMCE Editor
+            tinymce.init({
+                selector: '#productDescription',
+                height: 300,
+                plugins: 'lists link table',
+                toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link | table',
+                setup: function (editor) {
+                    editor.on('keyup', function () {
+                        updateCharCount();
+                    });
+                    editor.on('change', function () {
+                        updateCharCount();
+                    });
+                }
+            });
+
+            function updateCharCount() {
+                const text = tinymce.get('productDescription').getContent({ format: 'text' }).trim();
+                const count = text.length;
+                $('#charCount').text(count + ' karakter (Min: 50)');
+                
+                if (count < 50) {
+                    $('#charCount').removeClass('text-success').addClass('text-danger');
+                } else {
+                    $('#charCount').removeClass('text-danger').addClass('text-success');
+                }
+            }
+
+            // Resim önizleme
+            $('#ImageUrl').on('keyup change', function() {
+                const url = $(this).val();
+                if (url && url.trim() !== '') {
+                    $('#imagePreview').attr('src', url);
+                } else {
+                    $('#imagePreview').attr('src', 'https://via.placeholder.com/350');
+                }
+            });
+
+            // Features handling
+            let featureIndex = 1;
+            
+            $('#addFeature').click(function() {
+                const newFeature = `
+                    <div class="feature-row mb-2">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input name="Features[${featureIndex}].Name" class="form-control" placeholder="Özellik Adı" />
+                            </div>
+                            <div class="col-md-5">
+                                <input name="Features[${featureIndex}].Value" class="form-control" placeholder="Özellik Değeri" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-danger remove-feature">Kaldır</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                $('#featuresContainer').append(newFeature);
+                featureIndex++;
+            });
+            
+            $(document).on('click', '.remove-feature', function() {
+                $(this).closest('.feature-row').remove();
+            });
+        });
+    </script>
+} 

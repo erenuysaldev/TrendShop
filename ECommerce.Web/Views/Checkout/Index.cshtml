@@ -1,0 +1,522 @@
+@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Sipariş Tamamlama";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h4 class="mb-4">Sipariş Tamamlama</h4>
+                    
+                    <form asp-action="PlaceOrder" method="post" id="checkoutForm">
+                        <!-- Adım Göstergeleri -->
+                        <div class="mb-4">
+                            <div class="progress" style="height: 4px;">
+                                <div class="progress-bar" role="progressbar" style="width: 33%;" id="progressBar"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <span class="step active" id="step1">1. Adres Bilgileri</span>
+                                <span class="step" id="step2">2. Ödeme Bilgileri</span>
+                                <span class="step" id="step3">3. Sipariş Onayı</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Adım 1: Adres Bilgileri -->
+                        <div class="checkout-step" id="addressStep">
+                            <h5 class="mb-3">Teslimat Bilgileri</h5>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="FullName" class="form-label"></label>
+                                    <input asp-for="FullName" class="form-control" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label asp-for="PhoneNumber" class="form-label"></label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label asp-for="Address" class="form-label"></label>
+                                <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="City" class="form-label"></label>
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="District" class="form-label"></label>
+                                    <input asp-for="District" class="form-control" />
+                                    <span asp-validation-for="District" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="ZipCode" class="form-label"></label>
+                                    <input asp-for="ZipCode" class="form-control" />
+                                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label asp-for="OrderNotes" class="form-label"></label>
+                                <textarea asp-for="OrderNotes" class="form-control" rows="2" placeholder="Siparişinizle ilgili eklemek istediğiniz notlar..."></textarea>
+                            </div>
+                            
+                            <div class="form-check mb-3">
+                                <input asp-for="SameAsBillingAddress" class="form-check-input" id="sameAsBillingAddress" checked />
+                                <label asp-for="SameAsBillingAddress" class="form-check-label"></label>
+                            </div>
+                            
+                            <div id="billingAddressSection" style="display: none;">
+                                <h5 class="mb-3">Fatura Bilgileri</h5>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="BillingAddress" class="form-label"></label>
+                                    <textarea asp-for="BillingAddress" class="form-control" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label asp-for="BillingCity" class="form-label"></label>
+                                        <input asp-for="BillingCity" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label asp-for="BillingDistrict" class="form-label"></label>
+                                        <input asp-for="BillingDistrict" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label asp-for="BillingZipCode" class="form-label"></label>
+                                        <input asp-for="BillingZipCode" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-4">
+                                <button type="button" class="btn btn-primary" id="toPaymentBtn">Devam Et</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Adım 2: Ödeme Bilgileri -->
+                        <div class="checkout-step" id="paymentStep" style="display: none;">
+                            <h5 class="mb-3">Ödeme Bilgileri</h5>
+                            
+                            <div class="mb-4">
+                                <div class="card mb-3">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" checked>
+                                                <label class="form-check-label" for="creditCard">
+                                                    Kredi/Banka Kartı
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <img src="https://w7.pngwing.com/pngs/667/172/png-transparent-logo-brand-visa-font-visa-blue-text-trademark.png" alt="Visa" class="me-1" style="height: 24px; width: auto;">
+                                                <img src="https://e7.pngegg.com/pngimages/648/903/png-clipart-mastercard-logo-logo-payment-visa-mastercard-paypal-mastercard-icon-text-service-thumbnail.png" alt="MasterCard" class="me-1" style="height: 24px; width: auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-body p-3">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="paymentMethod" id="payAtDoor">
+                                            <label class="form-check-label" for="payAtDoor">
+                                                Kapıda Ödeme (+9.90₺)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="creditCardForm">
+                                <div class="mb-3">
+                                    <label asp-for="CardHolderName" class="form-label"></label>
+                                    <input asp-for="CardHolderName" class="form-control" />
+                                    <span asp-validation-for="CardHolderName" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="CardNumber" class="form-label"></label>
+                                    <input asp-for="CardNumber" class="form-control" placeholder="1234 5678 9012 3456" maxlength="16" />
+                                    <span asp-validation-for="CardNumber" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label asp-for="ExpiryMonth" class="form-label"></label>
+                                        <select asp-for="ExpiryMonth" class="form-select">
+                                            @for (int i = 1; i <= 12; i++)
+                                            {
+                                                <option value="@i">@i.ToString("00")</option>
+                                            }
+                                        </select>
+                                        <span asp-validation-for="ExpiryMonth" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label asp-for="ExpiryYear" class="form-label"></label>
+                                        <select asp-for="ExpiryYear" class="form-select">
+                                            @for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        <span asp-validation-for="ExpiryYear" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label asp-for="Cvv" class="form-label"></label>
+                                        <input asp-for="Cvv" class="form-control" placeholder="123" maxlength="4" />
+                                        <span asp-validation-for="Cvv" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary" id="backToAddressBtn">Geri</button>
+                                <button type="button" class="btn btn-primary" id="toReviewBtn">Devam Et</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Adım 3: Sipariş Özeti ve Onay -->
+                        <div class="checkout-step" id="reviewStep" style="display: none;">
+                            <h5 class="mb-3">Sipariş Özeti</h5>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-3 text-muted">Teslimat Bilgileri</h6>
+                                    <p class="mb-1"><strong id="reviewName"></strong></p>
+                                    <p class="mb-1" id="reviewAddress"></p>
+                                    <p class="mb-1" id="reviewCityDistrict"></p>
+                                    <p class="mb-1" id="reviewPhone"></p>
+                                    <p class="mb-0" id="reviewEmail"></p>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-3 text-muted">Ödeme Bilgileri</h6>
+                                    <p class="mb-1" id="reviewPaymentMethod">Kredi Kartı</p>
+                                    <p class="mb-0" id="reviewCardInfo"></p>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-3 text-muted">Sipariş Detayları</h6>
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <div>
+                                                <span>@item.ProductName</span>
+                                                <small class="text-muted d-block">@item.Quantity adet</small>
+                                            </div>
+                                            <span>@((item.Price * item.Quantity).ToString("C"))</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                <label class="form-check-label" for="termsCheck">
+                                    <a href="#" target="_blank">Mesafeli satış sözleşmesini</a> okudum ve kabul ediyorum.
+                                </label>
+                                <div class="invalid-feedback">
+                                    Devam etmek için sözleşmeyi kabul etmelisiniz.
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary" id="backToPaymentBtn">Geri</button>
+                                <button type="submit" class="btn btn-success" id="placeOrderBtn">Siparişi Tamamla</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4 sticky-top" style="top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Sipariş Özeti</h5>
+                    
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <img src="@(item.ImageUrl.StartsWith("http") ? item.ImageUrl : $"/images/no-image.jpg")" 
+                                     alt="@item.ProductName" 
+                                     style="width: 60px; height: 60px; object-fit: cover;">
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0">@item.ProductName</h6>
+                                <small class="text-muted">@item.Quantity adet</small>
+                                <div class="mt-1 fw-bold">@((item.Price * item.Quantity).ToString("C"))</div>
+                            </div>
+                        </div>
+                    }
+                    
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Ara Toplam</span>
+                        <span>@Model.TotalAmount.ToString("C")</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Kargo</span>
+                        <span>@Model.ShippingCost.ToString("C")</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2 fw-bold">
+                        <span>Toplam</span>
+                        <span>@Model.TotalWithShipping.ToString("C")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .step {
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .step.active {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        
+        .checkout-step {
+            transition: all 0.3s ease;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Fatura adresi kontrolü
+            $('#sameAsBillingAddress').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#billingAddressSection').slideUp();
+                } else {
+                    $('#billingAddressSection').slideDown();
+                }
+            });
+            
+            // Ödeme yöntemi kontrolü
+            $('input[name="paymentMethod"]').change(function() {
+                if ($('#creditCard').is(':checked')) {
+                    $('#creditCardForm').slideDown();
+                } else {
+                    $('#creditCardForm').slideUp();
+                }
+            });
+            
+            // Adım 1'den Adım 2'ye geçiş
+            $('#toPaymentBtn').click(function() {
+                // Form doğrulama
+                var isValid = validateAddressStep();
+                if (!isValid) return;
+                
+                $('#addressStep').hide();
+                $('#paymentStep').show();
+                $('#step1').removeClass('active');
+                $('#step2').addClass('active');
+                $('#progressBar').css('width', '66%');
+            });
+            
+            // Adım 2'den Adım 1'e dönüş
+            $('#backToAddressBtn').click(function() {
+                $('#paymentStep').hide();
+                $('#addressStep').show();
+                $('#step2').removeClass('active');
+                $('#step1').addClass('active');
+                $('#progressBar').css('width', '33%');
+            });
+            
+            // Adım 2'den Adım 3'e geçiş
+            $('#toReviewBtn').click(function() {
+                // Form doğrulama
+                var isValid = validatePaymentStep();
+                if (!isValid) return;
+                
+                // Özet bilgilerini doldur
+                updateReviewInfo();
+                
+                $('#paymentStep').hide();
+                $('#reviewStep').show();
+                $('#step2').removeClass('active');
+                $('#step3').addClass('active');
+                $('#progressBar').css('width', '100%');
+            });
+            
+            // Adım 3'ten Adım 2'ye dönüş
+            $('#backToPaymentBtn').click(function() {
+                $('#reviewStep').hide();
+                $('#paymentStep').show();
+                $('#step3').removeClass('active');
+                $('#step2').addClass('active');
+                $('#progressBar').css('width', '66%');
+            });
+            
+            // Form gönderimi
+            $('#checkoutForm').on('submit', function(e) {
+                if (!$('#termsCheck').is(':checked')) {
+                    e.preventDefault();
+                    $('#termsCheck').addClass('is-invalid');
+                    return false;
+                }
+                
+                // Form doğrulama
+                var isValid = validateAddressStep() && validatePaymentStep();
+                if (!isValid) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            // Adres adımı doğrulama
+            function validateAddressStep() {
+                var isValid = true;
+                
+                // Gerekli alanları kontrol et
+                if (!$('#FullName').val()) {
+                    $('#FullName').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#FullName').removeClass('is-invalid');
+                }
+                
+                if (!$('#Email').val()) {
+                    $('#Email').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Email').removeClass('is-invalid');
+                }
+                
+                if (!$('#PhoneNumber').val()) {
+                    $('#PhoneNumber').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#PhoneNumber').removeClass('is-invalid');
+                }
+                
+                if (!$('#Address').val()) {
+                    $('#Address').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Address').removeClass('is-invalid');
+                }
+                
+                if (!$('#City').val()) {
+                    $('#City').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#City').removeClass('is-invalid');
+                }
+                
+                if (!$('#District').val()) {
+                    $('#District').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#District').removeClass('is-invalid');
+                }
+                
+                if (!$('#ZipCode').val()) {
+                    $('#ZipCode').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#ZipCode').removeClass('is-invalid');
+                }
+                
+                return isValid;
+            }
+            
+            // Ödeme adımı doğrulama
+            function validatePaymentStep() {
+                // Kapıda ödeme seçilmişse doğrulama yapma
+                if ($('#payAtDoor').is(':checked')) {
+                    return true;
+                }
+                
+                var isValid = true;
+                
+                // Kredi kartı alanlarını kontrol et
+                if (!$('#CardHolderName').val()) {
+                    $('#CardHolderName').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#CardHolderName').removeClass('is-invalid');
+                }
+                
+                if (!$('#CardNumber').val() || $('#CardNumber').val().length !== 16) {
+                    $('#CardNumber').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#CardNumber').removeClass('is-invalid');
+                }
+                
+                if (!$('#Cvv').val() || $('#Cvv').val().length < 3) {
+                    $('#Cvv').addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $('#Cvv').removeClass('is-invalid');
+                }
+                
+                return isValid;
+            }
+            
+            // Özet bilgilerini güncelleme
+            function updateReviewInfo() {
+                $('#reviewName').text($('#FullName').val());
+                $('#reviewAddress').text($('#Address').val());
+                $('#reviewCityDistrict').text($('#District').val() + ', ' + $('#City').val() + ', ' + $('#ZipCode').val());
+                $('#reviewPhone').text($('#PhoneNumber').val());
+                $('#reviewEmail').text($('#Email').val());
+                
+                if ($('#creditCard').is(':checked')) {
+                    $('#reviewPaymentMethod').text('Kredi Kartı');
+                    var cardNumber = $('#CardNumber').val();
+                    var maskedNumber = '**** **** **** ' + cardNumber.substring(cardNumber.length - 4);
+                    $('#reviewCardInfo').text(maskedNumber);
+                } else {
+                    $('#reviewPaymentMethod').text('Kapıda Ödeme');
+                    $('#reviewCardInfo').text('');
+                }
+            }
+            
+            // Kart numarası formatı
+            $('#CardNumber').on('input', function() {
+                $(this).val($(this).val().replace(/\D/g, ''));
+            });
+            
+            // CVV formatı
+            $('#Cvv').on('input', function() {
+                $(this).val($(this).val().replace(/\D/g, ''));
+            });
+        });
+    </script>
+} 

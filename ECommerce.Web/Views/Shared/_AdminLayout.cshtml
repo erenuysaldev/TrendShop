@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar bg-dark text-white">
+            <div class="sidebar-heading p-3">
+                <h5>Admin Panel</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a asp-controller="Admin" asp-action="Index" 
+                   class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a asp-controller="Admin" asp-action="Products" 
+                   class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="bi bi-box"></i> Ürünler
+                </a>
+                <a asp-controller="Admin" asp-action="Categories" 
+                   class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="bi bi-tags"></i> Kategoriler
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white disabled">
+                    <i class="bi bi-people"></i> Kullanıcılar <span class="badge bg-warning text-dark">Bakımda</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white disabled">
+                    <i class="bi bi-cart"></i> Siparişler <span class="badge bg-warning text-dark">Bakımda</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="flex-grow-1">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-sm btn-outline-secondary" id="menu-toggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="ms-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                    <i class="bi bi-shop"></i> Mağazaya Git
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit" class="btn btn-link nav-link">
+                                        <i class="bi bi-box-arrow-right"></i> Çıkış Yap
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> 

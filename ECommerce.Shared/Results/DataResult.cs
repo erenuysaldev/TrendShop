@@ -4,8 +4,7 @@ namespace ECommerce.Shared.Results
     {
         public T Data { get; }
 
-        public DataResult(T data, bool success, string message = null) 
-            : base(success, message)
+        public DataResult(T data, bool success, string message = "") : base(success, message)
         {
             Data = data;
         }

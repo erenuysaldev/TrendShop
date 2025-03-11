@@ -1,0 +1,406 @@
+@model List<ECommerce.Web.Models.ViewModels.ProductViewModel>
+@{
+    ViewData["Title"] = "Ürünler";
+    Layout = "_AdminLayout";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Ürünler</h6>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            <i class="bi bi-plus"></i> Yeni Ürün
+        </button>
+    </div>
+    <div class="card-body">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="productsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Resim</th>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Fiyat</th>
+                        <th>Stok</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.Id</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                    {
+                                        @if (product.ImageUrl.StartsWith("http://") || product.ImageUrl.StartsWith("https://"))
+                                        {
+                                            <img src="@product.ImageUrl" 
+                                                 alt="@product.Name" 
+                                                 style="width: 50px; height: 50px; object-fit: cover;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@($"{ViewBag.ApiUrl}{product.ImageUrl}")" 
+                                                 alt="@product.Name" 
+                                                 style="width: 50px; height: 50px; object-fit: cover;" />
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <img src="/images/no-image.jpg" 
+                                             alt="No Image" 
+                                             style="width: 50px; height: 50px; object-fit: cover;" />
+                                    }
+                                </td>
+                                <td>@product.Name</td>
+                                <td>@product.CategoryName</td>
+                                <td>@product.Price.ToString("C2")</td>
+                                <td>@product.Stock</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary edit-product" 
+                                            data-id="@product.Id" data-bs-toggle="modal" 
+                                            data-bs-target="#editProductModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger delete-product" 
+                                            data-id="@product.Id" data-name="@product.Name">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Yeni Ürün Ekleme Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni Ürün Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-action="AddProduct" method="post" enctype="multipart/form-data" id="addProductForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Ürün Adı</label>
+                        <input type="text" name="Name" class="form-control" required minlength="2" />
+                        <div class="invalid-feedback">Ürün adı en az 2 karakter olmalıdır</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Açıklama</label>
+                        <textarea name="Description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select name="CategoryId" class="form-select" required>
+                            <option value="">Kategori Seçin</option>
+                            @if (ViewBag.Categories != null)
+                            {
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            }
+                        </select>
+                        <div class="invalid-feedback">Lütfen bir kategori seçin</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fiyat</label>
+                        <input type="number" name="Price" class="form-control" step="0.01" min="0.01" value="0.01" required />
+                        <div class="invalid-feedback">Fiyat 0'dan büyük olmalıdır</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Stok</label>
+                        <input type="number" name="Stock" class="form-control" min="0" value="1" required />
+                        <div class="invalid-feedback">Stok miktarı 0 veya daha büyük olmalıdır</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ürün Resmi</label>
+                        <input type="file" name="Image" class="form-control" accept="image/*" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Resim URL (Opsiyonel)</label>
+                        <input type="text" name="ImageUrl" class="form-control" placeholder="https://example.com/resim.jpg" />
+                        <small class="form-text text-muted">Resim yüklemek yerine URL girebilirsiniz</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Ürün Düzenleme Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ürün Düzenle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="editProductForm">
+                <div class="modal-body">
+                    <input type="hidden" id="editProductId" name="Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Ürün Adı</label>
+                        <input type="text" id="editName" name="Name" class="form-control" required minlength="2" />
+                        <div class="invalid-feedback">Ürün adı en az 2 karakter olmalıdır</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Açıklama</label>
+                        <textarea id="editDescription" name="Description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select id="editCategoryId" name="CategoryId" class="form-select" required>
+                            <option value="">Kategori Seçin</option>
+                            @if (ViewBag.Categories != null)
+                            {
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            }
+                        </select>
+                        <div class="invalid-feedback">Lütfen bir kategori seçin</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fiyat</label>
+                        <input type="number" id="editPrice" name="Price" class="form-control" step="0.01" min="0.01" required />
+                        <div class="invalid-feedback">Fiyat 0'dan büyük olmalıdır</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Stok</label>
+                        <input type="number" id="editStock" name="Stock" class="form-control" min="0" required />
+                        <div class="invalid-feedback">Stok miktarı 0 veya daha büyük olmalıdır</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Resim URL</label>
+                        <input type="text" id="editImageUrl" name="ImageUrl" class="form-control" placeholder="https://example.com/resim.jpg" />
+                        <small class="form-text text-muted">Resim URL'si güncellemek için doldurun, boş bırakırsanız mevcut resim korunur</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Ürün silme işlemi için onay
+        $('.delete-product').click(function() {
+            const id = $(this).data('id');
+            const name = $(this).data('name');
+            
+            if (confirm(`"${name}" ürününü silmek istediğinize emin misiniz?`)) {
+                $.post('/Admin/DeleteProduct/' + id)
+                    .done(function() {
+                        location.reload();
+                    })
+                    .fail(function() {
+                        alert('Ürün silinirken bir hata oluştu.');
+                    });
+            }
+        });
+
+        // Ürün düzenleme için modal açılınca verileri doldur
+        $('.edit-product').click(function() {
+            const id = $(this).data('id');
+            const row = $(this).closest('tr');
+            
+            // Modal alanlarını temizle
+            $('#editProductForm')[0].reset();
+            
+            // Ürün ID'sini ayarla
+            $('#editProductId').val(id);
+            
+            console.log(`Ürün detayları getiriliyor: ID=${id}`);
+            
+            // Mevcut ürün verilerini API'den çek
+            $.ajax({
+                url: `/Admin/GetProductDetails?id=${id}`,
+                type: 'GET',
+                dataType: 'json',
+                success: function(product) {
+                    console.log('Ürün verileri alındı:', product);
+                    // Form alanlarını doldur
+                    $('#editName').val(product.name);
+                    $('#editDescription').val(product.description);
+                    $('#editCategoryId').val(product.categoryId);
+                    $('#editPrice').val(product.price);
+                    $('#editStock').val(product.stock);
+                    $('#editImageUrl').val(product.imageUrl);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Ürün bilgileri alınırken hata oluştu:');
+                    console.error('Status:', status);
+                    console.error('Error:', error);
+                    console.error('Response:', xhr.responseText);
+                    alert('Ürün bilgileri yüklenirken hata oluştu. Konsolu kontrol edin.');
+                    $('#editProductModal').modal('hide');
+                }
+            });
+        });
+        
+        // Ürün düzenleme formunun gönderimi
+        $('#editProductForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            // Seçilen kategorinin adını al
+            var categoryId = $('#editCategoryId').val();
+            var categoryName = $('#editCategoryId option:selected').text();
+            
+            // Form verilerini al
+            const formData = {
+                Id: $('#editProductId').val(),
+                Name: $('#editName').val().trim(),
+                Description: $('#editDescription').val().trim(),
+                CategoryId: categoryId,
+                CategoryName: categoryName, // Kategori adını ekle
+                Price: parseFloat($('#editPrice').val()),
+                Stock: parseInt($('#editStock').val()),
+                ImageUrl: $('#editImageUrl').val().trim()
+            };
+            
+            // Validasyon
+            if (!formData.Name) {
+                alert('Ürün adı zorunludur');
+                return false;
+            }
+            
+            if (isNaN(formData.Price) || formData.Price <= 0) {
+                alert('Fiyat 0\'dan büyük olmalıdır');
+                return false;
+            }
+            
+            if (!formData.CategoryId) {
+                alert('Kategori seçimi zorunludur');
+                return false;
+            }
+            
+            if (isNaN(formData.Stock) || formData.Stock < 0) {
+                alert('Stok miktarı 0 veya daha büyük olmalıdır');
+                return false;
+            }
+            
+            // JSON verilerini log'la
+            console.log('Gönderilen form verisi:', formData);
+            
+            // AJAX isteği gönder
+            $.ajax({
+                url: '/Admin/UpdateProduct',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    if (response.success) {
+                        alert('Ürün başarıyla güncellendi.');
+                        location.reload();
+                    } else {
+                        alert('Hata: ' + response.message);
+                    }
+                },
+                error: function(xhr) {
+                    console.error('XHR Error:', xhr);
+                    alert('Ürün güncellenirken bir hata oluştu: ' + xhr.responseText);
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#addProductForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                var formData = new FormData(this);
+                
+                // Form verilerini kontrol et
+                console.log('Form verileri:');
+                for (var pair of formData.entries()) {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+                
+                // Name alanı kontrolü
+                if (!formData.get('Name') || formData.get('Name').trim() === '') {
+                    alert('Ürün adı zorunludur');
+                    return false;
+                }
+                
+                // Price alanı kontrolü
+                var price = parseFloat(formData.get('Price'));
+                if (isNaN(price) || price <= 0) {
+                    alert('Fiyat 0\'dan büyük olmalıdır');
+                    return false;
+                }
+                
+                // CategoryId alanı kontrolü
+                if (!formData.get('CategoryId') || formData.get('CategoryId') === '') {
+                    alert('Kategori seçimi zorunludur');
+                    return false;
+                }
+                
+                // Stock alanı kontrolü
+                var stock = parseInt(formData.get('Stock'));
+                if (isNaN(stock) || stock < 0) {
+                    alert('Stok miktarı 0 veya daha büyük olmalıdır');
+                    return false;
+                }
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert('Hata: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error('XHR Error:', xhr);
+                        try {
+                            var errorResponse = JSON.parse(xhr.responseText);
+                            if (errorResponse && errorResponse.errors) {
+                                var errorMessages = [];
+                                for (var key in errorResponse.errors) {
+                                    errorMessages.push(errorResponse.errors[key].join(', '));
+                                }
+                                alert('Doğrulama hatası: ' + errorMessages.join('\n'));
+                            } else {
+                                alert('Hata: ' + xhr.responseText);
+                            }
+                        } catch (e) {
+                            alert('Hata: ' + xhr.responseText);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+} 

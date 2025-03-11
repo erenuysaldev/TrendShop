@@ -1,0 +1,68 @@
+.sidebar {
+    min-height: 100vh;
+    width: 250px;
+}
+
+.sidebar .list-group-item {
+    border: none;
+    padding: 15px 20px;
+}
+
+.sidebar .list-group-item:hover {
+    background-color: #343a40 !important;
+    color: #fff !important;
+}
+
+.sidebar .list-group-item i {
+    margin-right: 10px;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+    margin-left: -250px;
+}
+
+.sidebar.toggled {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #page-content-wrapper {
+        min-width: 0;
+        margin-left: 0;
+    }
+}
+
+.border-left-primary {
+    border-left: 4px solid #4e73df !important;
+}
+
+.border-left-success {
+    border-left: 4px solid #1cc88a !important;
+}
+
+.border-left-info {
+    border-left: 4px solid #36b9cc !important;
+}
+
+.border-left-warning {
+    border-left: 4px solid #f6c23e !important;
+}
+
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+
+.text-gray-800 {
+    color: #5a5c69 !important;
+}
+
+/* İkon boyutları */
+.fa-2x {
+    font-size: 2em;
+}
+
+/* Kart gölgeleri */
+.shadow {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important;
+} 

@@ -1,0 +1,296 @@
+@model List<OrderViewModel>
+@{
+    ViewData["Title"] = "Sipariş Yönetimi";
+    Layout = "_AdminLayout";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Siparişler</h6>
+        <div>
+            <a href="/Admin/TestOrdersEndpoint" target="_blank" class="btn btn-info">
+                <i class="bi bi-bug"></i> API Bağlantısını Test Et
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="ordersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sipariş No</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                        <th>Toplam Tutar</th>
+                        <th>Teslimat Adresi</th>
+                        <th>Ödeme Yöntemi</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.OrderNumber</td>
+                                <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <span class="badge @(order.Status == "Bekliyor" ? "bg-warning" : 
+                                                        order.Status == "Tamamlandı" ? "bg-success" : 
+                                                        order.Status == "İptal Edildi" ? "bg-danger" : "bg-info")">
+                                        @order.Status
+                                    </span>
+                                </td>
+                                <td>@order.TotalAmount.ToString("C")</td>
+                                <td>@order.ShippingAddress</td>
+                                <td>@order.PaymentMethod</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-info view-order-details" data-order-id="@order.Id">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary update-order-status" data-order-id="@order.Id" data-bs-toggle="modal" data-bs-target="#updateStatusModal">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">Henüz sipariş bulunmamaktadır.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Sipariş Durumu Güncelleme Modal -->
+<div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="updateStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateStatusModalLabel">Sipariş Durumunu Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateStatusForm">
+                    <input type="hidden" id="orderId" name="orderId" />
+                    <div class="mb-3">
+                        <label for="orderStatus" class="form-label">Yeni Durum</label>
+                        <select class="form-select" id="orderStatus" name="orderStatus">
+                            <option value="Bekliyor">Bekliyor</option>
+                            <option value="Hazırlanıyor">Hazırlanıyor</option>
+                            <option value="Kargoya Verildi">Kargoya Verildi</option>
+                            <option value="Tamamlandı">Tamamlandı</option>
+                            <option value="İptal Edildi">İptal Edildi</option>
+                        </select>
+                    </div>
+                </form>
+                <div id="statusUpdateAlert" class="alert d-none"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" id="saveStatusButton">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sipariş Detayları Modal -->
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderDetailsModalLabel">Sipariş Detayları</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="orderDetailsContent">
+                <!-- Sipariş detayları buraya AJAX ile yüklenecek -->
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Yükleniyor...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // DataTable initialization
+            $('#ordersTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/tr.json'
+                }
+            });
+            
+            // Update Order Status
+            $('.update-order-status').on('click', function() {
+                var orderId = $(this).data('order-id');
+                $('#orderId').val(orderId);
+            });
+            
+            $('#saveStatusButton').on('click', function() {
+                var orderId = $('#orderId').val();
+                var status = $('#orderStatus').val();
+                
+                $.ajax({
+                    url: '/api/Order/Admin/UpdateOrderStatus/' + orderId,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ status: status }),
+                    headers: {
+                        'Authorization': 'Bearer ' + getCookie('token')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#statusUpdateAlert').removeClass('d-none alert-danger').addClass('alert-success').text('Durum başarıyla güncellendi.');
+                            
+                            // 2 saniye sonra sayfayı yenile
+                            setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            $('#statusUpdateAlert').removeClass('d-none alert-success').addClass('alert-danger').text('Hata: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        var errorMsg = 'Bir hata oluştu!';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMsg = xhr.responseJSON.message;
+                        }
+                        $('#statusUpdateAlert').removeClass('d-none alert-success').addClass('alert-danger').text('Hata: ' + errorMsg);
+                    }
+                });
+            });
+            
+            // View Order Details
+            $('.view-order-details').on('click', function() {
+                var orderId = $(this).data('order-id');
+                
+                // Detay modalını aç
+                $('#orderDetailsModal').modal('show');
+                
+                // Detayları AJAX ile yükle
+                $.ajax({
+                    url: '/api/Order/' + orderId,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + getCookie('token')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            var order = response.data;
+                            var detailsHtml = buildOrderDetailsHtml(order);
+                            $('#orderDetailsContent').html(detailsHtml);
+                        } else {
+                            $('#orderDetailsContent').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        }
+                    },
+                    error: function(xhr) {
+                        var errorMsg = 'Sipariş detayları yüklenirken bir hata oluştu!';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMsg = xhr.responseJSON.message;
+                        }
+                        $('#orderDetailsContent').html('<div class="alert alert-danger">' + errorMsg + '</div>');
+                    }
+                });
+            });
+            
+            function buildOrderDetailsHtml(order) {
+                var html = '<div class="row">';
+                
+                // Sipariş bilgileri
+                html += '<div class="col-md-6">';
+                html += '<h6 class="font-weight-bold">Sipariş Bilgileri</h6>';
+                html += '<table class="table table-bordered">';
+                html += '<tr><th>Sipariş No</th><td>' + order.orderNumber + '</td></tr>';
+                html += '<tr><th>Tarih</th><td>' + new Date(order.orderDate).toLocaleString() + '</td></tr>';
+                html += '<tr><th>Durum</th><td>' + order.status + '</td></tr>';
+                html += '<tr><th>Toplam Tutar</th><td>' + order.totalAmount.toFixed(2) + ' ₺</td></tr>';
+                html += '</table>';
+                html += '</div>';
+                
+                // Teslimat bilgileri
+                html += '<div class="col-md-6">';
+                html += '<h6 class="font-weight-bold">Teslimat Bilgileri</h6>';
+                html += '<table class="table table-bordered">';
+                html += '<tr><th>Alıcı</th><td>' + (order.fullName || '') + '</td></tr>';
+                html += '<tr><th>Telefon</th><td>' + (order.phoneNumber || '') + '</td></tr>';
+                html += '<tr><th>E-posta</th><td>' + (order.email || '') + '</td></tr>';
+                html += '<tr><th>Adres</th><td>' + order.shippingAddress + '</td></tr>';
+                html += '</table>';
+                html += '</div>';
+                
+                // Sipariş notları
+                if (order.orderNotes) {
+                    html += '<div class="col-md-12 mt-3">';
+                    html += '<h6 class="font-weight-bold">Sipariş Notları</h6>';
+                    html += '<p>' + order.orderNotes + '</p>';
+                    html += '</div>';
+                }
+                
+                // Ürün listesi
+                html += '<div class="col-md-12 mt-3">';
+                html += '<h6 class="font-weight-bold">Ürünler</h6>';
+                html += '<table class="table table-bordered">';
+                html += '<thead><tr><th>Ürün</th><th>Fiyat</th><th>Adet</th><th>Toplam</th></tr></thead>';
+                html += '<tbody>';
+                
+                if (order.items && order.items.length > 0) {
+                    order.items.forEach(function(item) {
+                        html += '<tr>';
+                        html += '<td>';
+                        if (item.imageUrl) {
+                            html += '<img src="' + item.imageUrl + '" alt="' + item.productName + '" width="50" class="me-2">';
+                        }
+                        html += item.productName + '</td>';
+                        html += '<td>' + item.price.toFixed(2) + ' ₺</td>';
+                        html += '<td>' + item.quantity + '</td>';
+                        html += '<td>' + (item.price * item.quantity).toFixed(2) + ' ₺</td>';
+                        html += '</tr>';
+                    });
+                } else {
+                    html += '<tr><td colspan="4" class="text-center">Ürün bulunamadı</td></tr>';
+                }
+                
+                html += '</tbody>';
+                html += '</table>';
+                html += '</div>';
+                
+                html += '</div>'; // row end
+                
+                return html;
+            }
+            
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+                return "";
+            }
+        });
+    </script>
+} 

@@ -5,10 +5,10 @@ namespace ECommerce.Shared.Results
         public bool Success { get; }
         public string Message { get; }
 
-        public Result(bool success, string message = null)
+        public Result(bool success, string? message = null)
         {
             Success = success;
-            Message = message;
+            Message = message ?? string.Empty;
         }
     }
 } 

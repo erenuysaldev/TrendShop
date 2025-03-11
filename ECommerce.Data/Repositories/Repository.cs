@@ -8,7 +8,7 @@ namespace ECommerce.Data.Repositories
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
 
         public Repository(ApplicationDbContext context)
         {
@@ -16,7 +16,7 @@ namespace ECommerce.Data.Repositories
             _dbSet = context.Set<T>();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -31,7 +31,7 @@ namespace ECommerce.Data.Repositories
             return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public async Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbSet.SingleOrDefaultAsync(predicate);
         }
@@ -46,8 +46,9 @@ namespace ECommerce.Data.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public void Update(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
+            entity.UpdatedAt = DateTime.Now;
             _dbSet.Update(entity);
         }
 
@@ -71,11 +72,16 @@ namespace ECommerce.Data.Repositories
             return await _dbSet.AnyAsync(predicate);
         }
 
-        public async Task<int> CountAsync(Expression<Func<T, bool>> predicate = null)
+        public async Task<int> CountAsync(Expression<Func<T, bool>>? predicate = null)
         {
             return predicate == null 
                 ? await _dbSet.CountAsync() 
                 : await _dbSet.CountAsync(predicate);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 } 
