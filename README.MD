@@ -1,5 +1,5 @@
 E-Commerce Web Uygulaması
-![Ana Sayfa](https://prnt.sc/xmRMFDrUoBPM)
+![Ana Sayfa](https://img001.prntscr.com/file/img001/Tjmr2fneSD2WWVbP334SvA.png)
 
 Bu proje, modern bir e-ticaret platformu sağlayan kapsamlı bir web uygulamasıdır. ASP.NET Core MVC kullanılarak geliştirilen bu çok katmanlı yapı, satıcılar, müşteriler ve yöneticiler için özel arayüzler sunarak eksiksiz bir e-ticaret deneyimi sağlar.
 
