@@ -1,5 +1,5 @@
 E-Commerce Web Uygulaması
-https://prnt.sc/xmRMFDrUoBPM
+![Ana Sayfa](https://prnt.sc/xmRMFDrUoBPM)
 
 Bu proje, modern bir e-ticaret platformu sağlayan kapsamlı bir web uygulamasıdır. ASP.NET Core MVC kullanılarak geliştirilen bu çok katmanlı yapı, satıcılar, müşteriler ve yöneticiler için özel arayüzler sunarak eksiksiz bir e-ticaret deneyimi sağlar.
 
