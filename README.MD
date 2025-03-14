@@ -1,91 +1,100 @@
-E-Commerce Web Uygulaması
-![Ana Sayfa](https://img001.prntscr.com/file/img001/Tjmr2fneSD2WWVbP334SvA.png)
+🛍️ E-Commerce Web Uygulaması
 
 Bu proje, modern bir e-ticaret platformu sağlayan kapsamlı bir web uygulamasıdır. ASP.NET Core MVC kullanılarak geliştirilen bu çok katmanlı yapı, satıcılar, müşteriler ve yöneticiler için özel arayüzler sunarak eksiksiz bir e-ticaret deneyimi sağlar.
 
-Proje Özellikleri
+🛠 Teknolojiler
 
-Kullanıcı Rolleri
+**ASP.NET Core MVC - Front-end uygulama mimarisi**
 
-Müşteri: Ürünleri görüntüleme, sepete ekleme ve satın alma.
+**Entity Framework Core - ORM ile veritabanı işlemleri**
 
-Satıcı: Ürün ekleme, stok yönetimi ve sipariş takibi.
+**Identity Framework - Kimlik doğrulama ve yetkilendirme**
 
-Admin: Sistem yönetimi, kullanıcı, kategori ve ürün kontrolü.
+**SQL Server - Veritabanı yönetim sistemi**
 
-Müşteri Paneli
+**Bootstrap 5 - Modern ve responsive tasarım**
 
-Ana sayfa ile öne çıkan ürünleri ve kategorileri görüntüleme
+**jQuery & AJAX - Dinamik sayfa etkileşimleri**
 
-Kategoriye göre filtreleme ve detaylı ürün sayfaları
+**TinyMCE - 📝 Zengin metin editörü**
 
-Alışveriş sepeti yönetimi ve kolay ödeme sistemi
+**Chart.js - 📊 Veri görselleştirme**
 
-Sipariş takibi, geçmiş siparişler ve profil yönetimi
+**Font Awesome - İkon setleri**
 
-Adres ve ödeme bilgilerini kaydetme
+**toastr.js - 🔔 Bildirimler**
 
-Satıcı Paneli
+🏛 Mimarisi
 
-Satıcı dashboard'u ile satış istatistiklerini görüntüleme
+Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
-Ürün ekleme, düzenleme, silme ve stok yönetimi
+**Presentation Layer (MVC) 🎭 - Kullanıcı arayüzü**
 
-TinyMCE ile zengin metin editörü
+**API Layer 🔧 - API isteklerinin yönetimi**
 
-Sipariş takibi, durum güncellemeleri ve mağaza yönetimi
+**Core Layer ⚙️ - İş kuralları ve servisler**
 
-Admin Paneli
+**Data Layer 🗄 - Veritabanı işlemleri**
 
-Kapsamlı istatistikler ve raporlar
+🚀 Özellikler
 
-Kullanıcı yönetimi (ekleme, düzenleme, silme, rol atama)
+👥 Kullanıcı Rolleri
 
-Kategori ve ürün yönetimi
+**Müşteri: Ürünleri görüntüleyebilir, sepete ekleyebilir ve satın alabilir.**
 
-Sipariş takibi ve sistem ayarları
+**Satıcı: Ürün ekleyebilir, stok yönetimi yapabilir, siparişleri takip edebilir.**
 
-Teknik Özellikler
+**Admin: Kullanıcı, kategori ve ürün yönetimi yapabilir.**
 
-ASP.NET Core MVC mimarisi
+🛒 Müşteri Paneli
 
-Çok katmanlı uygulama yapısı (Presentation, API, Core, Data)
+🏠 **Ana sayfa: Öne çıkan ürünler ve kategoriler**
 
-RESTful API ile client-server iletişimi
+🔍** Filtreleme: Kategoriye göre filtreleme ve ürün detay sayfaları**
 
-Entity Framework Core ile veritabanı işlemleri
+🛍** Sepet Yönetimi: Alışveriş sepeti ve kolay ödeme sistemi**
 
-Identity ile kimlik doğrulama ve yetkilendirme
+📦** Sipariş Takibi: Geçmiş siparişler ve profil yönetimi**
 
-Bootstrap 5 ile responsive tasarım
+🏠 **Adres ve Ödeme Bilgileri: Kayıtlı adresler ve ödeme yöntemleri**
 
-jQuery ve AJAX ile dinamik sayfa etkileşimleri
+🏪 Satıcı Paneli
 
-Chart.js ile veri görselleştirme
+📊** Dashboard: Satış istatistikleri**
 
-Hata ayıklama ve loglama mekanizmaları
+🛍** Ürün Yönetimi: Ürün ekleme, düzenleme, silme, stok kontrolü**
 
-Güvenlik Özellikleri
+📝 **Ürün Açıklamaları: TinyMCE ile zengin metin düzenleyici**
 
-Token tabanlı kimlik doğrulama
+📦 **Sipariş Takibi: Gelen siparişleri yönetme**
 
-Rol tabanlı yetkilendirme
+🔧 Admin Paneli
 
-CSRF koruması (Cross-Site Request Forgery)
+📈 **İstatistikler: Kapsamlı raporlar ve analizler**
 
-Şifrelenmiş kullanıcı verileri
+👥 **Kullanıcı Yönetimi: Ekleme, düzenleme, silme, rol atama**
 
-Güvenli API uç noktaları
+📂** Kategori ve Ürün Yönetimi: Kategori, alt kategori ve ürün kontrolü**
 
-Kurulum ve Kullanım
+🛡** Sipariş ve Sistem Ayarları: Sipariş takibi ve site ayarları**
+
+🔒 Güvenlik Özellikleri
+
+**JWT Authentication: Token tabanlı kimlik doğrulama**
+
+**Role-Based Authorization: Rol tabanlı yetkilendirme**
+
+**Güvenli API Uç Noktaları: Yetkisiz erişim kontrolü**
+
+📦 Kurulum ve Kullanım
 
 Gereksinimler:
 
-.NET 8.0
+**.NET 8.0**
 
-SQL Server
+**SQL Server**
 
-Visual Studio 2022 (tercihen)
+**Visual Studio 2022 (Tercihen)**
 
 Kurulum Adımları:
 
@@ -93,9 +102,9 @@ Projeyi GitHub’dan klonlayın.
 
 appsettings.json dosyasında veritabanı bağlantı ayarlarını yapılandırın.
 
-Package Manager Console’da veritabanı migration işlemlerini yapın.
+Package Manager Console üzerinden veritabanı migration işlemlerini çalıştırın.
 
-Projeyi derleyip çalıştırın.
+Projeyi derleyip başlatın.
 
 Admin Erişimi:
 
@@ -103,21 +112,13 @@ E-posta: admin@example.com
 
 Şifre: Admin123!
 
+🚀 Gelecek Geliştirmeler:
 
-Teknolojiler ve Kütüphaneler:
+💳 Ödeme Entegrasyonu (Stripe, PayPal vb.)
 
-ASP.NET Core 8.0
+📈 SEO Optimizasyonu
 
-Entity Framework Core
+🔑 Gelişmiş Yetkilendirme ve Roller
 
-Bootstrap 5
+Artık README dosyan çok daha düzenli ve profesyonel görünüyor! 🎯 Daha fazla eklemek ya da değiştirmek istersen haber ver! 🚀
 
-jQuery
-
-TinyMCE
-
-Chart.js
-
-Font Awesome
-
-toastr.js
