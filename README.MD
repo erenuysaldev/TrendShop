@@ -1,8 +1,8 @@
-🛍️ E-Commerce Web Uygulaması
+#🛍️ E-Commerce Web Uygulaması
 
 Bu proje, modern bir e-ticaret platformu sağlayan kapsamlı bir web uygulamasıdır. ASP.NET Core MVC kullanılarak geliştirilen bu çok katmanlı yapı, satıcılar, müşteriler ve yöneticiler için özel arayüzler sunarak eksiksiz bir e-ticaret deneyimi sağlar.
 
-🛠 Teknolojiler
+#🛠 Teknolojiler
 
 **ASP.NET Core MVC - Front-end uygulama mimarisi**
 
@@ -36,9 +36,9 @@ Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
 **Data Layer 🗄 - Veritabanı işlemleri**
 
-🚀 Özellikler
+#🚀 Özellikler
 
-👥 Kullanıcı Rolleri
+-👥 Kullanıcı Rolleri
 
 **Müşteri: Ürünleri görüntüleyebilir, sepete ekleyebilir ve satın alabilir.**
 
@@ -46,7 +46,7 @@ Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
 **Admin: Kullanıcı, kategori ve ürün yönetimi yapabilir.**
 
-🛒 Müşteri Paneli
+-🛒 Müşteri Paneli
 
 🏠 **Ana sayfa: Öne çıkan ürünler ve kategoriler**
 
@@ -58,7 +58,7 @@ Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
 🏠 **Adres ve Ödeme Bilgileri: Kayıtlı adresler ve ödeme yöntemleri**
 
-🏪 Satıcı Paneli
+-🏪 Satıcı Paneli
 
 📊** Dashboard: Satış istatistikleri**
 
@@ -68,7 +68,7 @@ Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
 📦 **Sipariş Takibi: Gelen siparişleri yönetme**
 
-🔧 Admin Paneli
+-🔧 Admin Paneli
 
 📈 **İstatistikler: Kapsamlı raporlar ve analizler**
 
@@ -78,7 +78,7 @@ Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
 🛡** Sipariş ve Sistem Ayarları: Sipariş takibi ve site ayarları**
 
-🔒 Güvenlik Özellikleri
+-🔒 Güvenlik Özellikleri
 
 **JWT Authentication: Token tabanlı kimlik doğrulama**
 
@@ -86,9 +86,9 @@ Proje çok katmanlı mimari yapısına göre tasarlanmıştır:
 
 **Güvenli API Uç Noktaları: Yetkisiz erişim kontrolü**
 
-📦 Kurulum ve Kullanım
+#📦 Kurulum ve Kullanım
 
-Gereksinimler:
+-Gereksinimler:
 
 **.NET 8.0**
 
