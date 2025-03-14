@@ -114,11 +114,13 @@ E-posta: admin@example.com
 
 🚀 Gelecek Geliştirmeler:
 
-💳 Ödeme Entegrasyonu (Stripe, PayPal vb.)
+Filtreler düzeltilecek
 
-📈 SEO Optimizasyonu
+Admin panelinde resim ekleme bugu düzeltilecek
 
-🔑 Gelişmiş Yetkilendirme ve Roller
+Satıcı panelinde ürünlerin gözükmeme problemi düzeltilecek
 
-Artık README dosyan çok daha düzenli ve profesyonel görünüyor! 🎯 Daha fazla eklemek ya da değiştirmek istersen haber ver! 🚀
+
+
+
 
